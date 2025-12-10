@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import onestation
+from app.routers import onestation, ahd
 
 app = FastAPI()
 
@@ -7,5 +7,5 @@ app = FastAPI()
 def health():
     return {"status": "OK", "message": "FastAPI is running on Railway"}
 
-# إضافة ربط الراوتر
 app.include_router(onestation.router)
+app.include_router(ahd.router)
