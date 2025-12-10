@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import onestation, ahd
+from app.routers import onestation, ahd, tickets
 
 app = FastAPI()
 
@@ -9,3 +9,4 @@ def health():
 
 app.include_router(onestation.router)
 app.include_router(ahd.router)
+app.include_router(tickets.router)
