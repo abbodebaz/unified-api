@@ -14,27 +14,36 @@ def unified_search(query: str):
         "tickets": [],
     }
 
-    # OneStation search
+    # ========================
+    # 🔵 1) OneStation search
+    # ========================
     cursor.execute("""
-        SELECT * FROM onestation
+        SELECT * FROM one_station
         WHERE Sales_order = %s OR phone_number = %s
     """, (query, query))
     results["onestation"] = cursor.fetchall()
 
-    # AHD search
+    # ========================
+    # 🔵 2) AHD search
+    # ========================
     cursor.execute("""
-        SELECT * FROM ahd
+        SELECT * FROM Ahd
         WHERE Sales_order = %s OR phone_number = %s
     """, (query, query))
     results["ahd"] = cursor.fetchall()
 
-    # Tickets search
+    # ========================
+    # 🔵 3) Tickets search
+    # ========================
     cursor.execute("""
-        SELECT * FROM tickets
+        SELECT * FROM Tickets
         WHERE SAP_Sales_Order = %s OR Customer_Phone = %s
     """, (query, query))
     results["tickets"] = cursor.fetchall()
 
     conn.close()
 
-    return results
+    return {
+        "query": query,
+        "sources": results
+    }
